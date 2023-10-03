@@ -1,11 +1,19 @@
 import {getServerSession} from 'next-auth'
+import {NextRequest,NextResponse} from 'next/server'
 import {NextApiRequest,NextApiResponse} from 'next'
-import {NextResponse} from 'next/server'
 import {authOptions} from '../app/api/auth/[...nextauth]/route'
 import client from './prismadb'
 
-const serverAuth=async(req:NextApiRequest,res:NextApiResponse)=>{
-    const session=await getServerSession(req,res,authOptions)
+const serverAuth=async(req:Request,res:Nextesponse)=>{
+    const session = await getServerSession(
+        req as unknown as NextApiRequest,
+        {
+          ...res,
+          getHeader: (name: string) => res.headers?.get(name),
+          setHeader: (name: string, value: string) => res.headers?.set(name, value),
+        } as unknown as NextApiResponse,
+        authOptions
+      );
     if(!session?.user){
         new NextResponse(JSON.stringify({error:'Unauthorized : Not Logged In'}),{status:401})
         throw new Error('Unauthorized: Not Logged In')
@@ -19,6 +27,6 @@ const serverAuth=async(req:NextApiRequest,res:NextApiResponse)=>{
         new NextResponse(JSON.stringify({error:'Unauthorized : User Does not Exist'}),{status:401})
         throw new Error('Unauthorized: User Does not exist')
     }
-    return user
+    return {user}
 }
 export default serverAuth
