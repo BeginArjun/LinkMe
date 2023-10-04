@@ -2,7 +2,7 @@ import client from "../../../../lib/prismadb";
 import serverAuth from "../../../../lib/serverAuth";
 import {NextResponse} from 'next/server'
 
-export const POST=async(req:Request,res:NextResponse)=>{
+export const POST=async(req:Request,res:Response)=>{
     try{
         const {user}=await serverAuth(req,res)
         const {linkTitle,url}=await req.json()
@@ -13,10 +13,9 @@ export const POST=async(req:Request,res:NextResponse)=>{
                 userId:user.id
             }
         })
-        return new NextResponse(JSON.stringify(link),{status:200})
+        return NextResponse.json(link,{status:200})
     }
     catch(err){
-        new NextResponse(JSON.stringify(err),{status:500})
-        throw new Error(err)
+        return NextResponse.json(err,{status:500})
     }
 }
