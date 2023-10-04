@@ -2,3 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+    --primary:rgba(187,153,221,0.08);
+    --text-primary:#BB99DD;
+}
+
+
+html,body{
+    height:100%;
+    width:100%;
+    overflow-x: hidden;
+}

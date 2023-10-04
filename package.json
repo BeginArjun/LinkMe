@@ -19,6 +19,7 @@
     "prisma": "^5.3.1",
     "react": "latest",
     "react-dom": "latest",
+    "react-icons": "^4.11.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   },
