@@ -13,7 +13,9 @@ export const GET=async(req:Request,
                 },
                 select:{
                     username:true,
-                    links:true
+                    links:true,
+                    linkemeUrl:true,
+                    image:true
                 }
         })
             if (!user) {
