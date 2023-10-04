@@ -11,8 +11,7 @@ export const POST=async(req:Request)=>{
             }
         })
         if(userExist){
-            new Response(JSON.stringify({message:"User already exist"}),{status:422})
-            throw new Error("User already exist")
+            return Response.json({message:"User already exist"},{status:422})
         }
         console.log(3)
         const salt=await bcrypt.genSalt(12);
@@ -24,10 +23,9 @@ export const POST=async(req:Request)=>{
                 password:hash
             }
         })
-        return new Response(JSON.stringify(user),{status:200})
+        return Response.json(user,{status:200})
     }
     catch(err){
-        new Response(JSON.stringify({message:err}),{status:400})
-        throw new Error(err)
+        return Response.json({message:err},{status:400})
     }
 }
