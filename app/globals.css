@@ -5,6 +5,10 @@
 :root{
     --primary:rgba(187,153,221,0.08);
     --text-primary:#BB99DD;
+    --base-grey:#7E7C78;
+    --brand-primary:#FF8ACD;
+    --decorative-green:#CFFCE3;
+    --feedback-danger:#FFD6D6;
 }
 
 
