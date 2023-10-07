@@ -1,6 +1,7 @@
 import './globals.css'
 import { Providers } from './provider'
 import { Inter, Dela_Gothic_One } from 'next/font/google'
+import { ChakraProviders } from './chakraprovider'
 
 const inter = Inter({ subsets: ['latin'] })
 const delaGothic= Dela_Gothic_One({weight:["400"],subsets:['latin']})
@@ -15,7 +16,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-        {children}
+          <ChakraProviders>
+              {children}
+            </ChakraProviders>
         </Providers>
       </body>
     </html>

@@ -31,9 +31,10 @@ export const GET=async(req:Request,
 export const PATCH=async(req:NextRequest,res:Response)=>{
         try{
             const userId=req.nextUrl.pathname.slice(10)
+            console.log(userId)
             const userExist=await client.user.findUnique({
                 where:{
-                    username:userId,
+                    id:userId,
                 },
             })
             if(!userExist){
@@ -41,8 +42,8 @@ export const PATCH=async(req:NextRequest,res:Response)=>{
                 throw new Error("User not Authorized")
             }
             const body=await req.json()
-            const {email,username}=body
-            const userDataToUpdate: { email?: string; username?: string } = {};
+            const {email,username,image}=body
+            const userDataToUpdate: { email?: string; username?: string;image?:string; } = {};
 
             if (email) {
                 const isEmailTaken = await client.user.findUnique({
@@ -67,10 +68,13 @@ export const PATCH=async(req:NextRequest,res:Response)=>{
                 }
                 userDataToUpdate.username = username;
             }   
+            if (image) {
+                userDataToUpdate.image = image;
+            }   
 
             const updatedUser = await client.user.update({
                 where: {
-                    username: userId,
+                    id: userId,
                 },
                 data: userDataToUpdate,
             });
