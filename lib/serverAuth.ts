@@ -22,6 +22,10 @@ const serverAuth=async(req:Request,res:Response)=>{
         const user = await client.user.findUnique({
             where: {
                 email: session.user.email
+            },
+            include:{
+                links:true,
+                linkemeUrl:true,
             }
         })
         if (!user) {

@@ -1,8 +1,7 @@
 import { Providers } from '../provider'
-import { Inter, Poppins } from 'next/font/google'
+import { Inter, Poppins,Dela_Gothic_One } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
-const poppins = Poppins({ weight: ['400','500','700'] , subsets: ['latin']})
+const delaGothic= Dela_Gothic_One({weight:"400",subsets:['latin']})
 
 import type { Metadata, ResolvingMetadata } from 'next'
  
@@ -26,7 +25,7 @@ export async function generateMetadata(
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={delaGothic.className}>
         <Providers>
         {children}
         </Providers>

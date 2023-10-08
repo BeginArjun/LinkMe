@@ -5,6 +5,18 @@
 :root{
     --primary:rgba(187,153,221,0.08);
     --text-primary:#BB99DD;
+    --base-grey:#7E7C78;
+    --secondary:#000;
+    --brand-primary:#FF8ACD;
+    --decorative-green:#CFFCE3;
+    --feedback-danger:#FFD6D6;
+    --decorative-blue:#8AF1FF;
+    --decorative-yellow:#FFE959;
+    --brand-yellow:#ffdd28;
+    --global-yellow:#D2E823;
+    --global-maroon:#780016;
+    --text-base:#e9c0e9;
+    --global-green:#254f1a;
 }
 
 
