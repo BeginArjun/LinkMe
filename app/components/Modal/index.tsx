@@ -8,19 +8,21 @@ import {
     ModalBody,
     ModalCloseButton,
   } from '@chakra-ui/react'
-import Button from '../Button';
+import Button,{IconButton} from '../Button';
 import {useDisclosure} from '@chakra-ui/react';
 import axios from 'axios';
 import { useCallback } from 'react';
 
 interface Props{
     children?:React.ReactNode;
-    display:string;
+    display?:string;
     title:string;
     actionButton:string;
     method?:string;
     load?:Object;
     url?:string;
+    variant?:'primary' | 'secondary';
+    icon?:React.ReactNode;
 }
 const Component=(props:Props)=>{
     const { isOpen, onOpen, onClose }=useDisclosure();
@@ -41,12 +43,15 @@ const Component=(props:Props)=>{
             catch(err){
                 console.log(err)
             }
+            finally{
+                onClose();
+            }
         }
         fetch();
     },[load,url])
     return(
         <>
-        <Button onClick={onOpen}>{props.display}</Button>
+        <IconButton className={`${props.variant==='secondary'?'shadow-none hover:bg-base':''}`} onClick={onOpen} variant={props.variant} icon={props.icon}>{props.display   || ''}</IconButton>
 
         <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />

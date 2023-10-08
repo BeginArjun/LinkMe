@@ -4,23 +4,17 @@ export const UserContext = createContext(null)
 
 export const UserProvider=({children})=>{
     const [user,setUser] = useState(null)
-    const [isLoading,setIsLoading] = useState(true)
     useEffect(()=>{
         const fetchUser=async()=>{
             try{
                 const res = await fetch('/api/current-user')
                 const newUser = await res.json()
-                setUser((prevUser)=>{
-                    if(JSON.stringify(prevUser)!==JSON.stringify(newUser)){
-                        return newUser
-                    }
-                })
+                if(JSON.stringify(newUser)!==JSON.stringify(user)){
+                    setUser(newUser)
+                }
             }
             catch(err){
                 throw new Error(err)
-            }
-            finally{
-                setIsLoading(false)
             }
         }
         fetchUser()

@@ -3,6 +3,7 @@ import { FiShare2 } from "react-icons/fi";
 import { usePathname} from 'next/navigation'
 import {useState,useEffect} from 'react';
 import {useSession} from 'next-auth/react'
+import Links from "../components/LINK";
 
 interface LinkMe{
     description:string,
@@ -15,6 +16,28 @@ interface LinkMe{
             url:string
         }[]
     }
+}
+
+const LINKS=({links})=>{
+    const color=['#ff5e5e','#42c1d5','#de7dff','#feb444','#02ff75']
+    const randomColor=color[Math.floor(Math.random()*color.length)]
+    return(
+        <div className="flex flex-col items-center justify-center gap-3 w-full">
+            {
+                links.map((link,idx)=><Links key={idx} link={link} color={color[Math.floor(Math.random()*color.length)]}/>)
+            }
+        </div>
+    )
+}
+
+const Header=({user})=>{
+    return(
+        <div className="flex flex-col items-center justify-center gap-3">
+            <img src={user.user?.image} alt="profile-pic" width='100' height='100' className="rounded-full"/>
+            <p className="font-bold">@{user.user.username}</p>
+            <p className="font-medium">{user.description}</p>
+        </div>
+    )
 }
 
 const LinkMe=()=>{
@@ -51,37 +74,10 @@ const LinkMe=()=>{
         }
     }
     return(
-        <main className="bg-[--primary] p-10 h-screen">
-            <div onClick={share}>
-                <FiShare2 className="text-xl"/>
-            </div>
-            <div className='m-auto flex flex-col items-center gap-8'>
-                <div className='flex flex-col items-center gap-4'>
-                    <img src={user?.image}
-                     alt="profile-pic" width="100" height="100" className='rounded-full border-2 border-[--text-primary] p-2'/>
-                    <p className='text-[--text-primary] text-base'>@{user?.username}</p>
-                    <p className="font-medium">{description}</p>
-                    { data?.user?.name===slug&&
-                    <button className="text-white bg-[--text-primary] rounded-md w-40 h-10">
-                        Edit Profile
-                    </button>
-                    }
-                </div>
-                <div>
-                    <ul className="text-[--text-primary] text-center flex flex-col items-center gap-4 justify-center">
-                        {
-                            user?.links?.map((link,index)=>{
-                                return(
-                                    <a href={link?.url} key={link?.id}>
-                                    <li className="cursor-pointer hover:text-white hover:bg-gradient-to-r hover:scale-110 hover:ease-in hover:duration-100 from-[#703da3] border-2 border-[--text-primary] w-60 h-12 flex justify-center items-center">
-                                        {link?.title}
-                                    </li>
-                                    </a>
-                                )
-                            })
-                        }
-                    </ul>
-                </div>
+        <main className="bg-[--brand-yellow] p-10 h-screen">
+            <div className="flex flex-col justify-center items-center gap-6">
+                {linkme.user && <Header user={linkme}/>}
+                {linkme.user && <LINKS links={linkme.user.links}/>}
             </div>
         </main>
     )
