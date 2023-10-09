@@ -18,10 +18,7 @@ export default function RootLayout({ children }) {
       <body className={delaGothic.className}>
         <Providers>
           <ChakraProviders>
-            <div className='bg-[--global-green]'>
-            <Navbar/>
               {children}
-              </div>
             </ChakraProviders>
         </Providers>
       </body>
