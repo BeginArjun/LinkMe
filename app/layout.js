@@ -2,7 +2,7 @@ import './globals.css'
 import { Providers } from './provider'
 import { Inter, Dela_Gothic_One } from 'next/font/google'
 import { ChakraProviders } from './chakraprovider'
-import Navbar from './components/Navbar'
+
 
 const inter = Inter({ subsets: ['latin'] })
 const delaGothic= Dela_Gothic_One({weight:"400",subsets:['latin']})
@@ -15,13 +15,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={delaGothic.className}>
+      <body className={delaGothic.className+' bg-[--global-green]'}>
         <Providers>
           <ChakraProviders>
-            <div className='bg-[--global-green]'>
-            <Navbar/>
               {children}
-              </div>
             </ChakraProviders>
         </Providers>
       </body>

@@ -4,7 +4,7 @@ import Image from "next/image";
 import {motion} from 'framer-motion'
 const Hero=()=>{
     return(
-        <motion.div className="h-screen text-[--global-yellow] bg-[--global-green] w-screen grid md:grid-cols-2 grid-rows-2 px-7 py-16 items-center mx-auto"
+        <motion.div className="h-full md:h-screen text-[--global-yellow] bg-[--global-green] w-screen flex flex-col justify-between md:flex-row px-7 py-16 items-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
@@ -22,13 +22,10 @@ const Hero=()=>{
                 </p>
                 <ArrowButton className="bg-[--brand-primary] text-black w-auto md:w-60 mt-4">Try it Free</ArrowButton>
             </motion.div>
-            <motion.div className="flex justify-center rounded-full relative"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: [1,1.2,1] }}
-            transition={{delay:0.1}}
+            <motion.div className="flex justify-center items-center h-full relative"
             >
-                <Image src='/assets/hero.png' alt='hero' width='300' height='300'
-                className="object-contain "
+                <img src='/assets/heromockup.png' alt='hero' height='300'
+                className="object-contain relative object-center"
                 />
             </motion.div>
         </motion.div>
