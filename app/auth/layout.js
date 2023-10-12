@@ -1,10 +1,6 @@
-import './globals.css'
-import { Providers } from './provider'
-import { Inter, Dela_Gothic_One } from 'next/font/google'
-import { ChakraProviders } from './chakraprovider'
+import { Providers } from '../provider'
+import { Dela_Gothic_One } from 'next/font/google'
 
-
-const inter = Inter({ subsets: ['latin'] })
 const delaGothic= Dela_Gothic_One({weight:"400",subsets:['latin']})
 
 export const metadata = {
@@ -15,11 +11,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={delaGothic.className+' bg-[--global-green]'}>
+      <body className={delaGothic.className}>
         <Providers>
-          <ChakraProviders>
               {children}
-            </ChakraProviders>
         </Providers>
       </body>
     </html>
