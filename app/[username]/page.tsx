@@ -57,7 +57,7 @@ const LinkMe=()=>{
         if(linkme?.description){
             setIsLoading(false)
         }
-    },[isLoading])
+    },[isLoading,linkme?.description])
 
     const {description,user}=linkme
 

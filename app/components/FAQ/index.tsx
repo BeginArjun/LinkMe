@@ -13,7 +13,7 @@ const FAQ=()=>{
                     <p>With us, you can link to all your content, all the time. 🤩</p>
                     </Accordion>
                     <Accordion title="You have to pay for a link in bio tool. 💸">
-                    <p>We're free, and always will be. 🤑</p>
+                    <p>We are free, and always will be. 🤑</p>
                     </Accordion>
                 </div>
             </div>

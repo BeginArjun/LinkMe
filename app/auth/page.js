@@ -50,7 +50,7 @@ const Auth=()=>{
             setError(err)
             console.log(err);
         }
-    })
+    },[value])
 
     const register=useCallback(async()=>{
         try{
