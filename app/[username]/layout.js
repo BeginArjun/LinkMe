@@ -3,17 +3,11 @@ import { Inter, Poppins,Dela_Gothic_One } from 'next/font/google'
 
 const delaGothic= Dela_Gothic_One({weight:"400",subsets:['latin']})
 
-import type { Metadata, ResolvingMetadata } from 'next'
  
-interface Props{
-  params: { username: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+
  
 export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+  { params }){
   // read route params
     const {username}=params
   return {
