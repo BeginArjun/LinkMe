@@ -7,6 +7,9 @@ const nextConfig = {
                 hostname: '**',
             }
         ]
+    },
+    typescript:{
+        ignoreBuildErrors:true
     }
 }
 

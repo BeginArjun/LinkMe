@@ -9,9 +9,7 @@ import UiLock from '@iconscout/react-unicons/icons/uil-lock'
 import UiUser from '@iconscout/react-unicons/icons/uil-user'
 import { FcGoogle } from "react-icons/fc";
 import { useState } from 'react'
-import ExclamationTriangle from '@iconscout/react-unicons/icons/uil-exclamation-triangle'
-import CheckCircle from '@iconscout/react-unicons/icons/uil-check-circle'
-import Toaster from '../components/Toaster'
+
 const Auth=()=>{
     const [value,setValue]=useState({username:'',password:'',email:''})
     const [variant,setVariant]=useState('register')
@@ -73,8 +71,6 @@ const Auth=()=>{
     }
     return(
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
-            {error && <Toaster icons={<ExclamationTriangle color='red'/>} variant='error' feedbackTitle={error?.message} feedback={error?.data?.message}/>}
-            {success && <Toaster icons={<CheckCircle color='green'/>} variant='success' feedbackTitle='Success' feedback='Request Successfull!'/>}
             <h1 className='font-bold text-center text-xl'>{variant==='register'?'Register':'Login'}</h1>
             <div className='m-auto flex flex-col justify-center items-center gap-4 w-[90vw] p-2'>
                 <Input onChange={handleChange} name='email' placeholder='johndoe@gmail.com' label='Email' 
