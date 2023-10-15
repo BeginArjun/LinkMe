@@ -13,18 +13,7 @@ import {useDisclosure} from '@chakra-ui/react';
 import axios from 'axios';
 import { useCallback } from 'react';
 
-interface Props{
-    children?:React.ReactNode;
-    display?:string;
-    title:string;
-    actionButton:string;
-    method?:string;
-    load?:Object;
-    url?:string;
-    variant?:'primary' | 'secondary';
-    icon?:React.ReactNode;
-}
-const Component=(props:Props)=>{
+const Component=(props)=>{
     const { isOpen, onOpen, onClose }=useDisclosure();
     const {load,url}=props;
     const handleSubmit=useCallback(async(e)=>{
@@ -48,7 +37,7 @@ const Component=(props:Props)=>{
             }
         }
         fetch();
-    },[load,url])
+    },[load,url,onClose,props.method])
     return(
         <>
         <IconButton className={`${props.variant==='secondary'?'shadow-none hover:bg-base':''}`} onClick={onOpen} variant={props.variant} icon={props.icon}>{props.display   || ''}</IconButton>

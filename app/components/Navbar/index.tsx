@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Button from '../Button'
-export default ()=>{
+const Navbar =()=>{
     return(
         <header className="sticky top-0 left-0 z-50 bg-transparent">
             <nav className="px-4 py-5">
@@ -16,3 +16,4 @@ export default ()=>{
         </header>
     )
 }
+export default Navbar;

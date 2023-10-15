@@ -1,5 +1,4 @@
 'use client'
-import UiArrowRight from '@iconscout/react-unicons/icons/uil-arrow-right';
 import { FaArrowRightLong } from "react-icons/fa6";
 interface ButtonProps{
     className?:string;

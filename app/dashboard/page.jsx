@@ -8,12 +8,8 @@ import Input from "../components/Input";
 import {useState,useEffect} from 'react';
 import { useUser } from "../context/User";
 import axios from "axios";
-interface User{
-    id:any;
-    username:string;
-    image:string;
-    email:string;
-}
+import Image from "next/image";
+
 
 const Header=({user})=>{
     console.log('Props',user)
@@ -23,7 +19,7 @@ const Header=({user})=>{
             <div className="flex flex-col md:flex-row justify-between items-center w-full gap-2">
                 <div className="flex flex-col justify-center items-center gap-2">
                     <div  className="rounded-full  border-2 border-black">
-                    <img src={user.image}
+                    <Image src={user.image}
                      alt="profile-pic" width='100' height='100' className="rounded-full"/>
                      </div>
                      <a href="#" className="text-black font-bold underline">@{user.username}</a>
@@ -41,8 +37,8 @@ const Header=({user})=>{
 }
 
 const EditProfile=(props)=>{
-    const [profile,setProfile]=useState({} as {email:string,username:string,image:string})
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const [profile,setProfile]=useState({})
+    const handleInputChange=(e)=>{
         const {name,value}=e.target
         setProfile({...profile,[name]:value})
     }
@@ -58,7 +54,7 @@ const EditProfile=(props)=>{
 
 const NewLink=()=>{
     const [link,setLink]=useState({linkTitle:'',url:''})
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const handleInputChange=(e)=>{
         const {name,value}=e.target;
         setLink({...link,[name]:value})
     }
@@ -92,12 +88,12 @@ const NotLinkMe=()=>{
 
 const LINKS=({user})=>{
     const links=user?.links
-    const [link,setLink]=useState({} as {title:string,url:string,description:string})
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const [link,setLink]=useState({})
+    const handleInputChange=(e)=>{
         const {name,value}=e.target;
         setLink({...link,[name]:value})
     }
-    const deleteLink=async(e:React.ChangeEvent<HTMLElement>)=>{
+    const deleteLink=async(e)=>{
         try{
             const id=e.target.id
             const {data}=await axios.delete('/api/link/'+id)
@@ -143,7 +139,7 @@ const LINKS=({user})=>{
 
 const LinkTreeCreate=()=>{
     const [linkTree,setLinkTree]=useState({})
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const handleInputChange=(e)=>{
         const {name,value}=e.target;
         setLinkTree({...linkTree,[name]:value})
     }

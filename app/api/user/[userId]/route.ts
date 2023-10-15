@@ -82,6 +82,5 @@ export const PATCH=async(req:NextRequest,res:Response)=>{
         }
         catch(err){
             new NextResponse(JSON.stringify(err),{status:500})
-            throw new Error(err)
         }
 }
