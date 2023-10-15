@@ -48,7 +48,7 @@ const Component=(props:Props)=>{
             }
         }
         fetch();
-    },[load,url])
+    },[load,url,onClose,props.method])
     return(
         <>
         <IconButton className={`${props.variant==='secondary'?'shadow-none hover:bg-base':''}`} onClick={onOpen} variant={props.variant} icon={props.icon}>{props.display   || ''}</IconButton>
