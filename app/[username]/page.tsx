@@ -61,19 +61,19 @@ const LinkMe=()=>{
 
     const {description,user}=linkme
 
-    const shareData={
-        title:"LinkMe",
-        text:"Hey,Check out my LinkMe page",
-        url:window.location.href
-    }
+    // const shareData={
+    //     title:"LinkMe",
+    //     text:"Hey,Check out my LinkMe page",
+    //     url:window.location.href
+    // }
 
-    const share=async()=>{
-        try{
-            await navigator.share(shareData)
-        }catch(err){
-            console.log(err)
-        }
-    }
+    // const share=async()=>{
+    //     try{
+    //         await navigator.share(shareData)
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // }
     return(
         <main className="bg-[--brand-yellow] p-10 h-screen">
             <div className="flex flex-col justify-center items-center gap-6">

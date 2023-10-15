@@ -5,7 +5,7 @@ const delaGothic= Dela_Gothic_One({weight:"400",subsets:['latin']})
 
 import type { Metadata, ResolvingMetadata } from 'next'
  
-type Props = {
+interface Props{
   params: { username: string }
   searchParams: { [key: string]: string | string[] | undefined }
 }
@@ -18,7 +18,7 @@ export async function generateMetadata(
     const {username}=params
   return {
     title: username.toUpperCase()+' | LinkMe',
-    description:'LinkMe Site for'+username
+    description:'LinkMe Site for '+username
   }
 }
 
