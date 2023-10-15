@@ -15,7 +15,7 @@ interface AccordionProps{
     className?: string;
 }
 
-export default ({title, children,className}: AccordionProps) =>{
+const Accordions=({title, children,className}: AccordionProps) =>{
     return(
         <motion.div
         initial={{transform: 'translateY(-100px)', opacity: 0}} whileInView={{transform: 'translateY(0px)', opacity: 1}}
@@ -37,3 +37,4 @@ export default ({title, children,className}: AccordionProps) =>{
         </motion.div>
     )
 }
+export default Accordions;

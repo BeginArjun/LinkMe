@@ -1,6 +1,6 @@
 'use client'
 import Accordion from "../Accordion"
-export default ()=>{
+const FAQ=()=>{
     return(
         <div className="p-11 justify-center items-center bg-[--global-maroon] w-screen h-full">
             <div className="flex flex-col justify-center gap-8 text-[--text-base] text-center">
@@ -20,3 +20,4 @@ export default ()=>{
         </div>
     )
 }
+export default FAQ;

@@ -1,4 +1,4 @@
-export default ()=>{
+const Footer ()=>{
     return(
         <footer className="py-7 flex justify-center bg-white">
             <div className="p-4">
@@ -7,3 +7,4 @@ export default ()=>{
         </footer>
     )
 }
+export default Footer;
