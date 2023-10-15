@@ -6,18 +6,7 @@ import {useSession} from 'next-auth/react'
 import Links from "../components/LINK";
 import Image from "next/image";
 
-interface LinkMe{
-    description:string,
-    user:{
-        username:string,
-        image:string,
-        links:{
-            id:string,
-            title:string,
-            url:string
-        }[]
-    }
-}
+
 
 const LINKS=({links})=>{
     const color=['#ff5e5e','#42c1d5','#de7dff','#feb444','#02ff75']
@@ -44,7 +33,7 @@ const Header=({user})=>{
 const LinkMe=()=>{
     const pathName=usePathname()
     const slug=pathName.slice(1)
-    const [linkme,setLinkMe]=useState({} as LinkMe)
+    const [linkme,setLinkMe]=useState({})
     const [isLoading,setIsLoading]=useState(true)
     const {data,status}=useSession()
     useEffect(()=>{

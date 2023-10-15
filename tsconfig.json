@@ -115,7 +115,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/api/register/route.ts", "app/context/User.js", "app/dashboard/loading.tsx", "app/[username]/layout.js"  ],
+, "app/api/register/route.ts", "app/context/User.js", "app/dashboard/loading.tsx", "app/[username]/layout.js", "app/[username]/page.jsx", "app/components/Modal/index.jsx", "app/dashboard/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

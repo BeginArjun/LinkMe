@@ -9,12 +9,7 @@ import {useState,useEffect} from 'react';
 import { useUser } from "../context/User";
 import axios from "axios";
 import Image from "next/image";
-interface User{
-    id:any;
-    username:string;
-    image:string;
-    email:string;
-}
+
 
 const Header=({user})=>{
     console.log('Props',user)
@@ -42,8 +37,8 @@ const Header=({user})=>{
 }
 
 const EditProfile=(props)=>{
-    const [profile,setProfile]=useState({} as {email:string,username:string,image:string})
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const [profile,setProfile]=useState({})
+    const handleInputChange=(e)=>{
         const {name,value}=e.target
         setProfile({...profile,[name]:value})
     }
@@ -59,7 +54,7 @@ const EditProfile=(props)=>{
 
 const NewLink=()=>{
     const [link,setLink]=useState({linkTitle:'',url:''})
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const handleInputChange=(e)=>{
         const {name,value}=e.target;
         setLink({...link,[name]:value})
     }
@@ -93,12 +88,12 @@ const NotLinkMe=()=>{
 
 const LINKS=({user})=>{
     const links=user?.links
-    const [link,setLink]=useState({} as {title:string,url:string,description:string})
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const [link,setLink]=useState({})
+    const handleInputChange=(e)=>{
         const {name,value}=e.target;
         setLink({...link,[name]:value})
     }
-    const deleteLink=async(e:React.ChangeEvent<HTMLElement>)=>{
+    const deleteLink=async(e)=>{
         try{
             const id=e.target.id
             const {data}=await axios.delete('/api/link/'+id)
@@ -144,7 +139,7 @@ const LINKS=({user})=>{
 
 const LinkTreeCreate=()=>{
     const [linkTree,setLinkTree]=useState({})
-    const handleInputChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const handleInputChange=(e)=>{
         const {name,value}=e.target;
         setLinkTree({...linkTree,[name]:value})
     }
