@@ -8,6 +8,7 @@ import Input from "../components/Input";
 import {useState,useEffect} from 'react';
 import { useUser } from "../context/User";
 import axios from "axios";
+import Image from "next/image";
 interface User{
     id:any;
     username:string;
@@ -23,7 +24,7 @@ const Header=({user})=>{
             <div className="flex flex-col md:flex-row justify-between items-center w-full gap-2">
                 <div className="flex flex-col justify-center items-center gap-2">
                     <div  className="rounded-full  border-2 border-black">
-                    <img src={user.image}
+                    <Image src={user.image}
                      alt="profile-pic" width='100' height='100' className="rounded-full"/>
                      </div>
                      <a href="#" className="text-black font-bold underline">@{user.username}</a>

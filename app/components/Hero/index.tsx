@@ -24,7 +24,7 @@ const Hero=()=>{
             </motion.div>
             <motion.div className="flex justify-center items-center h-full relative"
             >
-                <img src='/assets/heromockup.png' alt='hero' height='300'
+                <Image src='/assets/heromockup.png' alt='hero' height='300' width='600'
                 className="object-contain relative object-center"
                 />
             </motion.div>

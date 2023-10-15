@@ -4,6 +4,7 @@ import { usePathname} from 'next/navigation'
 import {useState,useEffect} from 'react';
 import {useSession} from 'next-auth/react'
 import Links from "../components/LINK";
+import Image from "next/image";
 
 interface LinkMe{
     description:string,
@@ -33,7 +34,7 @@ const LINKS=({links})=>{
 const Header=({user})=>{
     return(
         <div className="flex flex-col items-center justify-center gap-3">
-            <img src={user.user?.image} alt="profile-pic" width='100' height='100' className="rounded-full"/>
+            <Image src={user.user?.image} alt="profile-pic" width='100' height='100' className="rounded-full"/>
             <p className="font-bold">@{user.user.username}</p>
             <p className="font-medium">{user.description}</p>
         </div>
