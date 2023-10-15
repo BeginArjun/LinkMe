@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { useCallback } from 'react'
 import {signIn} from 'next-auth/react'
+import { useToast } from '@chakra-ui/react'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import UilMail from '@iconscout/react-unicons/icons/uil-envelope'
@@ -14,8 +15,19 @@ const Auth=()=>{
     const [value,setValue]=useState({username:'',password:'',email:''})
     const [variant,setVariant]=useState('register')
     const [withEmail,setWithEmail]=useState(false)
-    const [error,setError]=useState(null)
-    const [success,setSuccess]=useState(false)
+    const toast=useToast()
+
+    const showToast = (status, message) => {
+        toast({
+            title: status,
+            description: message,
+            status: status === 'error' ? 'error' : 'success',
+            duration: 3000,
+            isClosable: true,
+            position: 'top'   
+        });
+    };
+
     const toggleVariant=useCallback(()=>{
         setVariant((prev)=>prev==='register'?'login':'register')
     },[])
@@ -42,10 +54,10 @@ const Auth=()=>{
                 callbackUrl:'/dashboard'
             })
             console.log(data);
-            setSuccess(true)
+            showToast('success','Logged in successfully')
         }
         catch(err){
-            setError(err)
+            showToast('error',err.message)
             console.log(err);
         }
     },[value])
@@ -57,18 +69,14 @@ const Auth=()=>{
                 password:value.password,
                 email:value.email
             })
-            setSuccess(true)
+           showToast('success','Registered successfully')
+           await login()
         }
         catch(err){
-            setError(err)
+            showToast('error','Something went wrong: This Username or Email is already taken! Please try Again!!!')
             console.log(err)
         }
     },[value])
-    if(error){
-        setTimeout(()=>{
-            setError(null)
-        },3000)
-    }
     return(
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
             <h1 className='font-bold text-center text-xl'>{variant==='register'?'Register':'Login'}</h1>
