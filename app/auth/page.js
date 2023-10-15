@@ -77,11 +77,6 @@ const Auth=()=>{
             console.log(err)
         }
     },[value])
-    if(error){
-        setTimeout(()=>{
-            setError(null)
-        },3000)
-    }
     return(
         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
             <h1 className='font-bold text-center text-xl'>{variant==='register'?'Register':'Login'}</h1>
