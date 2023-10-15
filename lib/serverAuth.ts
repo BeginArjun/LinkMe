@@ -21,7 +21,7 @@ const serverAuth=async(req:Request,res:Response)=>{
         }
         const user = await client.user.findUnique({
             where: {
-                email: session.user.email
+                email: session.user.email || ''
             },
             include:{
                 links:true,
@@ -35,7 +35,7 @@ const serverAuth=async(req:Request,res:Response)=>{
         return { user }
     }
     catch(err){
-        throw new Error(err)
+        new NextResponse(JSON.stringify({ error: 'Unauthorized : Not Logged In' }), { status: 500 })
     }
 }
 export default serverAuth
