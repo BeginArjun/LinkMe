@@ -1,4 +1,4 @@
-const Footer ()=>{
+const Footer =()=>{
     return(
         <footer className="py-7 flex justify-center bg-white">
             <div className="p-4">
