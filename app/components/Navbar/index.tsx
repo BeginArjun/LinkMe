@@ -6,7 +6,7 @@ const Navbar =()=>{
             <nav className="px-4 py-5">
                 <div className="flex justify-center">
                 <div className="flex rounded-full bg-white backdrop-blur-md w-full justify-between items-center p-2">
-                    <Image src='/assets/Logo.svg' alt='logo' width='150' height='70' priority/>
+                    <Image src='/assets/logo.svg' alt='logo' width='150' height='70' priority/>
                     <a href='/auth'>
                         <Button className="bg-black text-white">Sign Up</Button>
                     </a>
