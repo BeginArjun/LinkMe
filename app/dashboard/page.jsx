@@ -159,7 +159,7 @@ const Dashboard=()=>{
             (
                 <>
                 <Header {...user}/>
-                {user?<LINKS {...user}/>:<NotLinkMe/>}
+                {user.user.linkemeUrl?<LINKS {...user}/>:<NotLinkMe/>}
                 </>
             )
             :<p>Loading...</p>}

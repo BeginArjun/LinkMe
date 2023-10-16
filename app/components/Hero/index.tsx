@@ -20,7 +20,9 @@ const Hero=()=>{
                      <span className="underline flex justify-start items-start font-medium decoration-[--brand-primary] decoration-2 underline-offset-2">
                          easily available to your followers <BsStars className="text-lg"/></span> 
                 </p>
+                <a href="/auth">
                 <ArrowButton className="bg-[--brand-primary] text-black w-auto md:w-60 mt-4">Try it Free</ArrowButton>
+                </a>
             </motion.div>
             <motion.div className="flex justify-center items-center h-full relative"
             >
