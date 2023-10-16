@@ -2,7 +2,7 @@ import './globals.css'
 import { Providers } from './provider'
 import { Inter, Dela_Gothic_One } from 'next/font/google'
 import { ChakraProviders } from './chakraprovider'
-
+import UserProvider from './context/User'
 
 const inter = Inter({ subsets: ['latin'] })
 const delaGothic= Dela_Gothic_One({weight:"400",subsets:['latin']})
@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
       <body className={delaGothic.className+' bg-[--global-green]'}>
         <Providers>
           <ChakraProviders>
-              {children}
+            <UserProvider>
+                {children}
+              </UserProvider>
             </ChakraProviders>
         </Providers>
       </body>
