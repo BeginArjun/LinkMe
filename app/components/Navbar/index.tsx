@@ -11,7 +11,7 @@ const Navbar =()=>{
                 <div className="flex rounded-full bg-white backdrop-blur-md w-full justify-between items-center p-2">
                     <Image src='/assets/logo.svg' alt='logo' width='150' height='70' priority/>
                     <a href={user?'/dashboard':'/auth'}>
-                        <Button className="bg-black text-white">{user?'Dashboard':'Sign Up'}</Button>
+                        <Button className="bg-black text-white">{user?.user?'Dashboard':'Sign Up'}</Button>
                     </a>
                 </div>
                 </div>
