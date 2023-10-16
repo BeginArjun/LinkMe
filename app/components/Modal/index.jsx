@@ -12,9 +12,11 @@ import Button,{IconButton} from '../Button';
 import {useDisclosure} from '@chakra-ui/react';
 import axios from 'axios';
 import { useCallback } from 'react';
+import { useUser } from '../../context/User';
 
 const Component=(props)=>{
     const { isOpen, onOpen, onClose }=useDisclosure();
+    const {user,setUser}=useUser();
     const {load,url}=props;
     const handleSubmit=useCallback(async(e)=>{
         e.preventDefault();
@@ -22,11 +24,13 @@ const Component=(props)=>{
             try{
                 if(props.method==='post'){
                 const {data}=await axios.post(url,load)
-                console.log(data)
+                setUser({...user,...data})
+                console.log(user)
                 }
                 if(props.method==='patch'){
                     const {data}=await axios.patch(url,load)
-                    console.log(data)
+                    setUser({...user,...data})
+                    console.log(user)
                 }
             }
             catch(err){

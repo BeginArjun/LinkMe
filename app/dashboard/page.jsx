@@ -151,19 +151,15 @@ const LinkTreeCreate=()=>{
 }
 
 const Dashboard=()=>{
-    const userDetail=useUser()
-    const [user,setUser]=useState(null)
-    useEffect(()=>{
-        if(userDetail)
-        setUser(userDetail)
-    },[userDetail])
+    const {user,setUser}=useUser()
+    console.log('User: ',user?.image)
     return(
         <div className="p-4">
             { user?
             (
                 <>
                 <Header {...user}/>
-                {user.user.linkemeUrl?<LINKS {...user}/>:<NotLinkMe/>}
+                {user?<LINKS {...user}/>:<NotLinkMe/>}
                 </>
             )
             :<p>Loading...</p>}
