@@ -12,9 +12,9 @@ const Header=()=>{
 
 const Loading=()=>{
     return(
-        <>
+        <div className='h-screen bg-white'>
         <Header/>
-        </>
+        </div>
     )
 }
 export default Loading

@@ -1,5 +1,8 @@
 'use client'
+import React from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
+import {Tooltip} from '@chakra-ui/react'
+
 interface ButtonProps{
     className?:string;
     onClick?:(event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -17,6 +20,20 @@ const Button=(props:ButtonProps)=>{
         </button>
     )
 }
+
+export const ButtonSecondaryMedium=(props:ButtonProps)=>{
+    let bg='--brand-primary'
+    if(props.variant==='secondary'){
+        bg='#fff'
+    }
+    return(
+        <button className={`${props.className} bg-white
+         border-2 border-black min-h-12 p-2 min-w-32 rounded-full`}>
+            {props.children}
+        </button>
+    )
+}
+
 
 export const IconButton=(props:ButtonProps)=>{
     return(

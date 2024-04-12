@@ -67,13 +67,13 @@ model Links{
   url       String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User @relation(fields: [userId], references: [id])
+  user      User @relation(fields: [userId], references: [id],onUpdate: Cascade, onDelete: Cascade)
   userId    String @db.ObjectId
 }
 
 model Linkme{
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id],onUpdate: Cascade, onDelete: Cascade)
   userId String @db.ObjectId @unique
   description String?
 }
