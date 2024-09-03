@@ -1,65 +1,76 @@
-'use client'
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-  } from '@chakra-ui/react'
-import Button,{IconButton} from '../Button';
-import {useDisclosure} from '@chakra-ui/react';
-import axios from 'axios';
-import { useCallback } from 'react';
-import { useUser } from '../../context/User';
+import { useCallback, useEffect, useRef } from "react";
+import ModalProvider from "./ModalContext";
+import { motion } from "framer-motion";
+import clsx from "clsx";
 
-const Component=(props)=>{
-    const { isOpen, onOpen, onClose }=useDisclosure();
-    const {user,setUser}=useUser();
-    const {load,url}=props;
-    const handleSubmit=useCallback(async(e)=>{
-        e.preventDefault();
-        const fetch=async()=>{
-            try{
-                if(props.method==='post'){
-                const {data}=await axios.post(url,load)
-                setUser({...user,...data})
-                console.log(user)
-                }
-                if(props.method==='patch'){
-                    const {data}=await axios.patch(url,load)
-                    setUser({...user,...data})
-                    console.log(user)
-                }
-            }
-            catch(err){
-                console.log(err)
-            }
-            finally{
-                onClose();
-            }
-        }
-        fetch();
-    },[load,url,onClose,props.method])
-    return(
-        <>
-        <IconButton className={`${props.variant==='secondary'?'shadow-none hover:bg-base':''}`} onClick={onOpen} variant={props.variant} icon={props.icon}>{props.display   || ''}</IconButton>
 
-        <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>{props.title}</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                    {props.children}
-                </ModalBody>
-                <ModalFooter>
-                    <Button className='bg-[--brand-primary] font-bold w-full' onClick={handleSubmit}>{props.actionButton}</Button>
-                </ModalFooter>
-            </ModalContent>
-        </Modal>
-        </>
-    )
+const backdropVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
+};
+
+const modalVariants = {
+  hidden: { opacity: 0, y: '-100vh' },
+  visible: { opacity: 1, y: '0', transition: { duration: 0.3 } },
+  exit: { opacity: 0, y: '100vh', transition: { duration: 0.3 } },
+};
+
+export default function Modal ({children, onClose, size='medium', style={}, ...props}) {
+  const modalSize = {
+    small: 'w-1/3',
+    medium: 'w-1/2',
+    large: 'w-2/3',
+  }
+
+  const dialogRef = useRef(null)
+
+  useEffect(()=>{
+    if(dialogRef.current){
+      dialogRef.current.showModal()
+    }
+
+    return () => {
+      if(dialogRef.current){
+        dialogRef.current.close()
+      }
+    }
+  },[])
+
+  const handleOutsideClick = useCallback((e) => {
+    if(dialogRef.current && !dialogRef.current.contains(e.target)){
+      onClose()
+    }
+  }, [dialogRef.current])
+
+
+  return (
+    <ModalProvider {...props} onClose={onClose}>
+      <motion.div className="shadow-md fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+      variants={backdropVariants}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+      onClick={handleOutsideClick}
+      >
+        <motion.dialog ref={dialogRef} className={clsx(
+          'bg-white shadow-lg rounded-lg',
+          modalSize[size],
+          'overflow-visible'
+        )}
+        style={style}
+        onClick={(e) => e.stopPropagation()}
+        >
+          <motion.div
+            className="w-full px-6 py-4"
+            variants={modalVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {children}
+          </motion.div>
+        </motion.dialog>
+
+      </motion.div>
+    </ModalProvider>
+  );
 }
-export default Component;

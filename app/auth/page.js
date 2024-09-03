@@ -2,7 +2,6 @@
 import axios from 'axios'
 import { useCallback } from 'react'
 import {signIn} from 'next-auth/react'
-import { useToast } from '@chakra-ui/react'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import UilMail from '@iconscout/react-unicons/icons/uil-envelope'
@@ -15,18 +14,7 @@ const Auth=()=>{
     const [value,setValue]=useState({username:'',password:'',email:''})
     const [variant,setVariant]=useState('register')
     const [withEmail,setWithEmail]=useState(false)
-    const toast=useToast()
-
-    const showToast = (status, message) => {
-        toast({
-            title: status,
-            description: message,
-            status: status === 'error' ? 'error' : 'success',
-            duration: 3000,
-            isClosable: true,
-            position: 'top'   
-        });
-    };
+    
 
     const toggleVariant=useCallback(()=>{
         setVariant((prev)=>prev==='register'?'login':'register')
@@ -54,10 +42,10 @@ const Auth=()=>{
                 callbackUrl:'/dashboard'
             })
             console.log(data);
-            showToast('success','Logged in successfully')
+            // showToast('success','Logged in successfully')
         }
         catch(err){
-            showToast('error',err.message)
+            // showToast('error',err.message)
             console.log(err);
         }
     },[value])
@@ -69,11 +57,11 @@ const Auth=()=>{
                 password:value.password,
                 email:value.email
             })
-           showToast('success','Registered successfully')
+        //    showToast('success','Registered successfully')
            await login()
         }
         catch(err){
-            showToast('error','Something went wrong: This Username or Email is already taken! Please try Again!!!')
+            // showToast('error','Something went wrong: This Username or Email is already taken! Please try Again!!!')
             console.log(err)
         }
     },[value])

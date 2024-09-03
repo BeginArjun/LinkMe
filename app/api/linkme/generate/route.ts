@@ -4,11 +4,11 @@ import client from '../../../../lib/prismadb'
 
 export const POST=async(req:Request,res:NextResponse)=>{
     try{
-        const {user}=await serverAuth(req,res)
+        const user=await serverAuth(req,res)
         const {description}=await req.json()
         const linkmeExist=await client.linkme.findUnique({
             where:{
-                userId:user.id
+                userId:user?.user.id
             }
         })
         if(linkmeExist){
@@ -17,8 +17,12 @@ export const POST=async(req:Request,res:NextResponse)=>{
         }
         const linkme=await client.linkme.create({
             data:{
-                description,
-                userId:user.id
+                bio : description,
+                user : {
+                    connect : {
+                        id : user?.user.id
+                    }
+                }
             }
         })
         return NextResponse.json(linkme,{status:200})

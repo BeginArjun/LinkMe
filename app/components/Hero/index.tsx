@@ -1,7 +1,7 @@
-import { ArrowButton } from "../Button"
 import { BsStars } from "react-icons/bs";
 import Image from "next/image";
 import {motion} from 'framer-motion'
+import Button from "../Button";
 const Hero=()=>{
     return(
         <motion.div className="h-full md:h-screen text-[--global-yellow] bg-[--global-green] w-screen flex flex-col justify-between md:flex-row px-7 py-16 items-center"
@@ -21,7 +21,7 @@ const Hero=()=>{
                          easily available to your followers <BsStars className="text-lg"/></span> 
                 </p>
                 <a href="/auth">
-                <ArrowButton className="bg-[--brand-primary] text-black w-auto md:w-60 mt-4">Try it Free</ArrowButton>
+                <Button className="bg-[--brand-primary] text-black w-auto md:w-60 mt-4">Try it Free</Button>
                 </a>
             </motion.div>
             <motion.div className="flex justify-center items-center h-full relative"

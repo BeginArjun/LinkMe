@@ -1,20 +1,14 @@
 'use client'
-import { Skeleton, SkeletonCircle, SkeletonText,Box } from '@chakra-ui/react'
 
-const Header=()=>{
-    return(
-        <Box padding='6' boxShadow='lg' bg='white'>
-            <SkeletonCircle size='10' />
-            <SkeletonText mt='4' noOfLines={4} spacing='4' skeletonHeight='2' />
-        </Box>
-    )
-}
+import { TailSpin } from "react-loader-spinner"
+
+
 
 const Loading=()=>{
     return(
-        <>
-        <Header/>
-        </>
+        <div className="w-screen h-screen bg-white">
+            <TailSpin width={100} height={100} color="#000"/>
+        </div>
     )
 }
 export default Loading

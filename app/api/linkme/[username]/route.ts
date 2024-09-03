@@ -15,15 +15,19 @@ export const GET=async(req:Request,{params}:{params:{username:string}})=>{
         }
         const linkme=await client.linkme.findUnique({
             where:{
-                userId:isUser.id
+                userId:isUser.id,
             },
             select:{
-                description:true,
+                bio:true,
                 user:{
                     select:{
                         username:true,
                         image:true,
-                        links:true
+                        links:{
+                            where:{
+                                visible:true
+                            }
+                        }
                     }
                 }
             }
@@ -43,11 +47,11 @@ export const GET=async(req:Request,{params}:{params:{username:string}})=>{
 export const PATCH=async(req:NextRequest,res:NextResponse)=>{
     try{
         const username=req.nextUrl.pathname.slice(12)
-        const {user}=await serverAuth(req,res)
+        const user=await serverAuth(req,res)
         const {description}=await req.json()
         const linkmeExist=await client.linkme.findUnique({
             where:{
-                userId:user.id,
+                userId:user?.user.id,
                 AND:{
                     user:{
                         username
@@ -61,10 +65,10 @@ export const PATCH=async(req:NextRequest,res:NextResponse)=>{
         }
         const linkme=await client.linkme.update({
             where:{
-                userId:user.id
+                userId:user?.user.id
             },
             data:{
-                description
+                bio:description
             }
         })
         return NextResponse.json(linkme,{status:200})

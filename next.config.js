@@ -10,7 +10,13 @@ const nextConfig = {
     },
     typescript:{
         ignoreBuildErrors:true
-    }
+    },
+    experimental: {
+        serverActions: true,
+        optimizeFonts: true,
+        optimizeImages: true,
+        optimizeCss: true,
+    },
 }
 
 module.exports = nextConfig

@@ -1,46 +1,68 @@
-'use client'
-import { FaArrowRightLong } from "react-icons/fa6";
-interface ButtonProps{
-    className?:string;
-    onClick?:(event: React.MouseEvent<HTMLButtonElement>) => void;
-    children?:React.ReactNode;
-    variant?:'primary' | 'secondary';
-    icon?:React.ReactNode;
+'use client';
+
+import React, { ReactNode, ButtonHTMLAttributes, useState, useTransition } from 'react';
+import { FaSpinner } from 'react-icons/fa';
+import { clsx } from 'clsx';
+
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'outlined' | 'filled';
+  children: ReactNode;
+  onClick?: () => void;
+  width?: string;
+  height?: string;
+  loading?: boolean;
+  className?: string;
 }
 
-const Button=(props:ButtonProps)=>{
-    return(
-        <button className={`${props.className} bg-[${props.variant==='primary'?'--brand-primary':'#000'}] rounded-full inline-flex justify-center items-center px-2 py-4 h-12 min-h-[48px] gap-4 border-[1px] border-black shadow-[-2px_2px_0_0_#000] 
-        hover:shadow-[-2px_2px_0_0_#000] active:shadow-none active:translate-y-1 active:translate-x-1 transition-all font-[--font-delaGothic]
-        `} onClick={props.onClick}>
-            {props.children}
-        </button>
-    )
-}
+const Button: React.FC<ButtonProps> = ({
+  variant = 'filled',
+  children,
+  onClick,
+  width,
+  height,
+  loading,
+  className,
+  ...props
+}) => {
+  const [isPending, startTransition] = useTransition();
 
-export const IconButton=(props:ButtonProps)=>{
-    return(
-        <button className={`${props.className} text-center ${props.variant==='primary'? 'bg-[--brand-primary]' : 'bg-[--secondary]' } ${props.variant==='primary'? 'text-black' : 'text-white' } rounded-full inline-flex justify-center items-center px-2 py-4 h-12 min-h-[48px] gap-4 border-[1px] border-black shadow-[-2px_2px_0_0_#000] 
-        hover:shadow-[-2px_2px_0_0_#000] focus:bg-[--brand-primary] active:shadow-none active:translate-y-1 active:translate-x-1 transition-all font-[--font-delaGothic]`}
-        onClick={props.onClick}
-        >
-            <div className="flex items-center justify-center gap-2">
-            {props.children}
-            {props.icon && <div className="mr-2">{props.icon}</div>}
-            </div>
-        </button>
-    )
-}
+  const handleClick = () => {
+    if (onClick) {
+      startTransition(onClick);
+    }
+  };
 
-export const ArrowButton=(props:ButtonProps)=>{
-    return(
-        <button className={`${props.className} group rounded-full inline-flex justify-center items-center px-7 py-6 h-12 min-h-[48px] gap-2`}>
-            {props.children}
-            <div className='group-hover:translate-x-2 transition delay-75 ease-in'>
-            <FaArrowRightLong/>
-            </div>
-        </button>
-    )
-}
+  const baseClasses =
+    'rounded-full font-medium text-lg shadow-[2px_2px_0_0_#000] transition-all duration-75 ease-in flex items-center justify-center';
+
+  const variantClasses = {
+    filled:
+      'bg-[--brand-primary] hover:bg-pink-500 border border-black active:shadow-none disabled:bg-slate-500 text-white',
+    outlined:
+      'border border-black bg-white hover:bg-gray-200 active:shadow-none text-black',
+  };
+
+  return (
+    <button
+      type="button"
+      className={clsx(
+        baseClasses,
+        variantClasses[variant],
+        width ? `w-${width}` : '',
+        height ? `h-${height}` : '',
+        loading || isPending ? 'cursor-not-allowed' : '',
+        className
+      )}
+      onClick={handleClick}
+      {...props}
+    >
+      {loading || isPending ? (
+        <FaSpinner className="animate-spin mr-2" />
+      ) : (
+        children
+      )}
+    </button>
+  );
+};
 
 export default Button;
